@@ -1,0 +1,39 @@
+/*
+AC01 - Criação das tabelas: Compra, Fornecedor, Produto e ItemCompra
+*/
+
+CREATE TABLE Compra(
+NF VARCHAR(50) NOT NULL
+,DiaEntrega DATETIME NOT NULL
+,Valor MONEY NOT NULL
+,DataCompra DATETIME NOT NULL
+,CONSTRAINT Pk_compra PRIMARY KEY(NF)
+)
+
+GO
+
+CREATE TABLE Fornecedor(
+ID INT IDENTITY NOT NULL ,
+Nome varchar(50) ,
+CONSTRAINT PK_Fornecedor PRIMARY KEY(ID)
+)
+GO
+CREATE TABLE Produto(
+ID INT IDENTITY NOT NULL,
+Nome VARCHAR(50) NOT NULL,
+ID_FornecedorPadrão INT NOT NULL,
+CONSTRAINT PK_Produto PRIMARY KEY (ID),
+CONSTRAINT FK_FornecedorPadrão FOREIGN KEY (ID_FornecedorPadrão) REFERENCES Fornecedor(ID)
+)
+GO
+
+CREATE TABLE ItemCompra(
+ID_Produto INT NOT NULL
+,ID_Fornecedor INT NOT NULL
+,NF_Compra VARCHAR(50) NOT NULL
+,QTD INT NOT NULL
+,CONSTRAINT PK_ItemCompra PRIMARY KEY(ID_Produto, ID_Fornecedor, NF_Compra)
+,CONSTRAINT FK_Produto FOREIGN KEY(ID_Produto) REFERENCES Produto(ID)
+,CONSTRAINT FK_Fornecedor FOREIGN KEY(ID_Fornecedor) REFERENCES Fornecedor(ID)
+,CONSTRAINT FK_Compra FOREIGN KEY(NF_Compra) REFERENCES COMPRA(NF)
+)
