@@ -1,5 +1,5 @@
 --=X=-- --=X=-- --=X=-- --=X=-- --=X=-- --=X=-- --=X=-- --=X=-- --=X=-- 
---=X=-- AC1 - DDL - Criação da base
+--=X=-- AC03 - DDL - Criaï¿½ï¿½o da base
 --=X=-- --=X=-- --=X=-- --=X=-- --=X=-- --=X=-- --=X=-- --=X=-- --=X=-- 
 
 CREATE DATABASE M4_compras_mercearia;
@@ -54,7 +54,7 @@ VALUES	( 'Ambev' )
 	,	( 'P&G' ) 	
 	,	( 'Dist. PPG' )
 
---Não foi definido quem é o fornecedor padrão, então, tive que estabelecer um
+--Nï¿½o foi definido quem ï¿½ o fornecedor padrï¿½o, entï¿½o, tive que estabelecer um
 INSERT INTO Produto ( nome, ID_FornecedorPadrao )
 VALUES ( 'Skol', (SELECT id from Fornecedor WHERE nome = 'Ambev') )
 	,  ( 'Fralda Pampers', (SELECT id from Fornecedor WHERE nome = 'P&G') )
@@ -68,19 +68,19 @@ VALUES ( '#112434', 3, '8243.00', '20171021' )
 INSERT INTO ItemCompra ( ID_Produto, ID_Fornecedor, NF_Compra, QTDE )
 VALUES (	(SELECT id FROM Produto WHERE nome = 'Skol')	
 		,	(SELECT id FROM Fornecedor WHERE nome = 'Ambev')	
-		,	'#112434'--Se já sei o ID da Compra, basta utilizá-lo, não preciso buscá-lo
+		,	'#112434'--Se jï¿½ sei o ID da Compra, basta utilizï¿½-lo, nï¿½o preciso buscï¿½-lo
 		, 300
 	),  (	(SELECT id FROM Produto WHERE nome = 'Fralda Pampers')	
 		,	(SELECT id FROM Fornecedor WHERE nome = 'P&G')	
-		,	'#324235'--Se já sei o ID da Compra, basta utilizá-lo, não preciso buscá-lo
+		,	'#324235'--Se jï¿½ sei o ID da Compra, basta utilizï¿½-lo, nï¿½o preciso buscï¿½-lo
 		, 25
 	),  (	(SELECT id FROM Produto WHERE nome = 'Fralda Pampers')	
 		,	(SELECT id FROM Fornecedor WHERE nome = 'Dist. PPG')	
-		,	'#455464'--Se já sei o ID da Compra, basta utilizá-lo, não preciso buscá-lo
+		,	'#455464'--Se jï¿½ sei o ID da Compra, basta utilizï¿½-lo, nï¿½o preciso buscï¿½-lo
 		, 10
 	)
 
---Conferências:
+--Conferï¿½ncias:
 select * from Fornecedor
 select * from Produto
 select * from Compra
@@ -89,11 +89,11 @@ select * from ItemCompra
 /*
 AC03
 Execute as seguintes consultas no banco de dados criado:
-- Lista com o nome dos produtos disponíveis no cadastro.
-- Lista com o número da nota fiscal das compras cuja data seja superior à 01/01/2017 e Dias para entrega superior à 10.
+- Lista com o nome dos produtos disponï¿½veis no cadastro.
+- Lista com o nï¿½mero da nota fiscal das compras cuja data seja superior ï¿½ 01/01/2017 e Dias para entrega superior ï¿½ 10.
 - Lista com o Nome do produto, o nome do fornecedor e a quantidade fornecida.
-- Lista com o nome dos produtos e seus respectivos fornecedores padrão.
-- Lista com o número na nota fiscal, o nome do produto, a data, quantidade e valor cobrado.
+- Lista com o nome dos produtos e seus respectivos fornecedores padrï¿½o.
+- Lista com o nï¿½mero na nota fiscal, o nome do produto, a data, quantidade e valor cobrado.
 */
 select Nome from Produto
 ------------------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ from Produto
 inner join  ItemCompra on ID_Produto = Produto.Id
 inner join Fornecedor on ItemCompra.ID_Fornecedor = Fornecedor.Id
 -------------------------------------------------------------------------------------------------------
-select Produto.Nome, Fornecedor.nome as [Fornecedor padrão]
+select Produto.Nome, Fornecedor.nome as [Fornecedor padrï¿½o]
 from Produto
 inner join Fornecedor on Fornecedor.ID = Produto.ID_FornecedorPadrao
 ------------------------------------------------------------------------------------------
